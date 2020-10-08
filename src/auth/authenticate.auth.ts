@@ -1,6 +1,6 @@
 import Token from "./token.auth";
 
-import { findByEmail, UserData } from "../repositories/users.repository";
+import userRepository, { UserData } from "../repositories/users.repository";
 
 import { LOGIN_EXPIRATION_TIME } from "./config";
 
@@ -8,7 +8,7 @@ import hash from "../helpers/hash";
 import { ERR_USER_NOT_FOUND, ERR_INVALID_PASSWORD } from "../helpers/errorTypes";
 
 const login = async (email: string, password: string) => {
-  const user = await findByEmail(email) as UserData;
+  const user = await userRepository.findByEmail(email) as UserData;
 
   if(!user) {
     throw new Error(ERR_USER_NOT_FOUND);

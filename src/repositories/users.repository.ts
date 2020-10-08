@@ -22,8 +22,9 @@ const create = async (userData: UserData) => {
   return userModel.save();
 };
 
-export const findByEmail = (email: string) => UserModel.findOne({ email }) as any;
+const findByEmail = (email: string) => UserModel.findOne({ email }) as any;
 
 export default {
-  create
+  create,
+  findByEmail
 };

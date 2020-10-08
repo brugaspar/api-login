@@ -25,7 +25,7 @@ const create = async (req: Request, h: ResponseToolkit) => {
         throw boom.badImplementation(err);
     }
   }
-}
+};
 
 export default {
   create
