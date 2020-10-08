@@ -1,16 +1,10 @@
 import { Request, ResponseToolkit } from "@hapi/hapi";
 import boom from "@hapi/boom";
 
-import userRepository from "../repositories/users.repository";
-
+import userRepository, { UserData } from "../repositories/users.repository";
 import hash from "../helpers/hash";
 
-interface UserData {
-  name: string;
-  birthday: string;
-  email: string;
-  password: string;
-};
+import { ERR_DUPLICATED_EMAIL } from "../helpers/errorTypes";
 
 const create = async (req: Request, h: ResponseToolkit) => {
   try {
@@ -25,7 +19,7 @@ const create = async (req: Request, h: ResponseToolkit) => {
     return h.response(user).code(201);    
   } catch(err) {
     switch(err.message) {
-      case "ERR_DUPLICATED_EMAIL":
+      case ERR_DUPLICATED_EMAIL:
         throw boom.badData("E-mail already registered in our database");
       default:
         throw boom.badImplementation(err);

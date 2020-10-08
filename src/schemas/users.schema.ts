@@ -1,6 +1,6 @@
 import Joi from "@hapi/joi";
 
-export default Joi.object({
+export default Joi.object().keys({
   name: Joi.string().min(3).required(),
   birthday: Joi.date().iso(),
   email: Joi.string().email().required(),
